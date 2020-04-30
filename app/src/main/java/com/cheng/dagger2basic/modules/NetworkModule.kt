@@ -1,5 +1,6 @@
 package com.cheng.dagger2basic.modules
 
+import com.cheng.dagger2basic.network.TestApi
 import com.cheng.dagger2basic.utilities.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -17,5 +18,11 @@ class NetworkModule {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun getTestApiService(retrofit: Retrofit): TestApi {
+        return retrofit.create(TestApi::class.java)
     }
 }

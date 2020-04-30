@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var vehicle: Vehicle
     @Inject
-    lateinit var retrofit: Retrofit
+    lateinit var testApi: TestApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         vehicle.printVehicleAttributes()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val testApi = retrofit.create(TestApi::class.java)
             val response = testApi.getPosts()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful && response.body() != null) {
